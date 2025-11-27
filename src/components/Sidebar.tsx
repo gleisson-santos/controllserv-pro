@@ -122,9 +122,10 @@ export default function Sidebar({ selectedDate, onDataSaved, onGeneralInfoChange
     
     setSaving(true);
     try {
+      // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
       // Get current user
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Usuário não autenticado');
+      // const { data: { user } } = await supabase.auth.getUser();
+      // if (!user) throw new Error('Usuário não autenticado');
 
       const { error } = await (supabase as any)
         .from('general_info')
@@ -134,7 +135,7 @@ export default function Sidebar({ selectedDate, onDataSaved, onGeneralInfoChange
           servico_turma_02: dailyInfo.servico_turma_02,
           servico_turma_05: dailyInfo.servico_turma_05,
           oge: dailyInfo.oge,
-          created_by: user.id
+          created_by: '00000000-0000-0000-0000-000000000000' // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
         }, {
           onConflict: 'date,created_by'
         });

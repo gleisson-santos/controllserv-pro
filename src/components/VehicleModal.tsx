@@ -123,9 +123,10 @@ export default function VehicleModal({ vehicle, onClose, onSave, selectedDate }:
 
         console.log('Vehicle updated successfully, now updating status...');
 
+        // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
         // Get current user for status update
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) throw new Error('Usuário não autenticado');
+        // const { data: { user } } = await supabase.auth.getUser();
+        // if (!user) throw new Error('Usuário não autenticado');
 
         console.log('Updating vehicle status:', {
           vehicle_id: vehicle.id,
@@ -133,7 +134,7 @@ export default function VehicleModal({ vehicle, onClose, onSave, selectedDate }:
           status,
           observations: observations,
           observationsLength: observations.length,
-          created_by: user.id
+          created_by: '00000000-0000-0000-0000-000000000000' // TEMP
         });
 
         // Update vehicle status
@@ -145,7 +146,7 @@ export default function VehicleModal({ vehicle, onClose, onSave, selectedDate }:
             status,
             observations,
             driver,
-            created_by: user.id
+            created_by: '00000000-0000-0000-0000-000000000000' // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
           }, {
             onConflict: 'vehicle_id,date'
           });
@@ -162,9 +163,10 @@ export default function VehicleModal({ vehicle, onClose, onSave, selectedDate }:
           description: "Veículo atualizado com sucesso!",
         });
       } else {
+        // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
         // Get current user
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) throw new Error('Usuário não autenticado');
+        // const { data: { user } } = await supabase.auth.getUser();
+        // if (!user) throw new Error('Usuário não autenticado');
 
         // Create new vehicle
         const { data: newVehicle, error } = await supabase
@@ -173,7 +175,7 @@ export default function VehicleModal({ vehicle, onClose, onSave, selectedDate }:
             name, 
             type,
             driver,
-            created_by: user.id
+            created_by: '00000000-0000-0000-0000-000000000000' // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
           })
           .select()
           .single();
@@ -194,7 +196,7 @@ export default function VehicleModal({ vehicle, onClose, onSave, selectedDate }:
             status,
             observations: observations,
             driver,
-            created_by: user.id
+            created_by: '00000000-0000-0000-0000-000000000000' // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
           });
 
         if (statusError) throw statusError;

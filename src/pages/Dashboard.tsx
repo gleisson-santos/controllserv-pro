@@ -25,11 +25,12 @@ export default function Dashboard() {
   const [generalInfo, setGeneralInfo] = useState({ extravasamento: 0, servico_turma_02: 0, servico_turma_05: 0, oge: 0 });
   const [isHookLoading, setIsHookLoading] = useState(false);
 
-  useEffect(() => {
-    if (!loading && !user) {
-      navigate('/auth');
-    }
-  }, [user, loading, navigate]);
+  // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
+  // useEffect(() => {
+  //   if (!loading && !user) {
+  //     navigate('/auth');
+  //   }
+  // }, [user, loading, navigate]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -39,25 +40,30 @@ export default function Dashboard() {
     });
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <i className="fas fa-spinner fa-spin text-2xl text-primary"></i>
-      </div>
-    );
-  }
+  // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
+  // if (loading) {
+  //   return (
+  //     <div className="min-h-screen bg-background flex items-center justify-center">
+  //       <i className="fas fa-spinner fa-spin text-2xl text-primary"></i>
+  //     </div>
+  //   );
+  // }
 
-  if (!user) {
-    return null;
-  }
+  // if (!user) {
+  //   return null;
+  // }
 
   const getUserInitial = () => {
-    const name = user.user_metadata?.full_name || user.email;
-    return name ? name.charAt(0).toUpperCase() : 'U';
+    // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
+    // const name = user?.user_metadata?.full_name || user?.email;
+    // return name ? name.charAt(0).toUpperCase() : 'U';
+    return 'U';
   };
 
   const getUserDisplayName = () => {
-    return user.user_metadata?.full_name || user.email?.split('@')[0] || 'Usuário';
+    // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
+    // return user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Usuário';
+    return 'Usuário';
   };
 
   const handleWebhook = async () => {
@@ -117,7 +123,7 @@ export default function Dashboard() {
         },
         usuario: {
           nome: getUserDisplayName(),
-          email: user.email
+          email: 'usuario@temp.com' // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
         }
       };
 
@@ -171,7 +177,7 @@ export default function Dashboard() {
               </div>
               <div className="text-right">
                 <p className="font-medium">Olá {getUserDisplayName()}</p>
-                <p className="text-sm text-blue-100">{user.email}</p>
+                <p className="text-sm text-blue-100">usuario@temp.com</p>
               </div>
             </div>
             <button
@@ -187,13 +193,14 @@ export default function Dashboard() {
               )}
               Hook
             </button>
-            <button
+            {/* AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA */}
+            {/* <button
               onClick={handleSignOut}
               className="btn-secondary !bg-white/10 !text-white border-white/20 hover:!bg-white/20"
             >
               <i className="fas fa-sign-out-alt"></i>
               Sair
-            </button>
+            </button> */}
           </div>
         </div>
       </header>

@@ -114,9 +114,10 @@ export default function VehicleManagement({ selectedDate, onDateChange, refreshT
         return;
       }
 
+      // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
       // Get current user
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Usuário não autenticado');
+      // const { data: { user } } = await supabase.auth.getUser();
+      // if (!user) throw new Error('Usuário não autenticado');
 
       // Delete existing data for current date
       const { error: deleteError } = await supabase
@@ -133,7 +134,7 @@ export default function VehicleManagement({ selectedDate, onDateChange, refreshT
         status: item.status,
         observations: item.observations,
         driver: item.driver,
-        created_by: user.id
+        created_by: '00000000-0000-0000-0000-000000000000' // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
       }));
 
       const { error: insertError } = await supabase
