@@ -74,20 +74,21 @@ export default function DailyObservations({ selectedDate }: DailyObservationsPro
   };
 
   const saveObservations = async () => {
-    if (!observations.trim() || !user) return;
+    // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
+    if (!observations.trim()) return;
     
     setSaving(true);
     try {
       // Get current user
-      const { data: { user: currentUser } } = await supabase.auth.getUser();
-      if (!currentUser) throw new Error('Usuário não autenticado');
+      // const { data: { user: currentUser } } = await supabase.auth.getUser();
+      // if (!currentUser) throw new Error('Usuário não autenticado');
 
       const { error } = await supabase
         .from('daily_observations')
         .upsert({
           date: observationDate,
           content: observations,
-          created_by: currentUser.id
+          created_by: '00000000-0000-0000-0000-000000000000' // AUTENTICAÇÃO TEMPORARIAMENTE DESABILITADA
         });
 
       if (error) throw error;
